@@ -1,7 +1,10 @@
 package com.example.testtask.storage;
 
+import com.example.testtask.SymbolFrequencyModel;
+
 import java.util.HashMap;
+import java.util.List;
 
 public interface SymbolFrequencyStorage {
-    HashMap<Character, Integer> count(String line);
+    List<SymbolFrequencyModel> count(String line);
 }

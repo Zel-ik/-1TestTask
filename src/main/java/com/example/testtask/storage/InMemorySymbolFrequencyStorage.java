@@ -1,10 +1,10 @@
 package com.example.testtask.storage;
 
+import com.example.testtask.SymbolFrequencyModel;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
@@ -22,7 +22,8 @@ public class InMemorySymbolFrequencyStorage implements SymbolFrequencyStorage {
         return result;
     }
     @Override
-    public HashMap<Character, Integer> count(String line) {
+    public List<SymbolFrequencyModel> count(String line) {
+        List<SymbolFrequencyModel> resultList = new ArrayList<>();
         char[] chars = line.toCharArray();
         HashMap<Character, Integer> charMap = new HashMap<>();
 
@@ -34,8 +35,14 @@ public class InMemorySymbolFrequencyStorage implements SymbolFrequencyStorage {
             }
         }
 
-        sortByValue(charMap);
+        for(Character c : charMap.keySet()){
+            resultList.add(new SymbolFrequencyModel(c,charMap.get(c)));
+        }
 
-        return charMap;
+        resultList = resultList.stream()
+                .sorted(Comparator.comparing(SymbolFrequencyModel::getAmount))
+                .collect(Collectors.toList());
+
+        return resultList;
     }
 }
