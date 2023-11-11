@@ -1,13 +1,11 @@
 package com.example.testtask;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class SymbolFrequencyModel {
     Character key;
     Integer amount;

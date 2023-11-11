@@ -6,8 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 @Controller(value = "/symbolFrequency")
 @AllArgsConstructor
@@ -17,7 +16,7 @@ public class SymbolFrequencyController {
     SymbolFrequencyService symbolFrequencyService;
 
     @PostMapping
-    public List<SymbolFrequencyModel> count(@RequestBody String line) {
+    public ArrayList<SymbolFrequencyModel> count(@RequestBody String line) {
         return symbolFrequencyService.count(line);
     }
 }

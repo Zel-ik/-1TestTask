@@ -2,9 +2,8 @@ package com.example.testtask.storage;
 
 import com.example.testtask.SymbolFrequencyModel;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface SymbolFrequencyStorage {
-    List<SymbolFrequencyModel> count(String line);
+    ArrayList<SymbolFrequencyModel> count(String line);
 }

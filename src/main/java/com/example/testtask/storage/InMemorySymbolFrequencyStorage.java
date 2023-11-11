@@ -4,29 +4,22 @@ import com.example.testtask.SymbolFrequencyModel;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 public class InMemorySymbolFrequencyStorage implements SymbolFrequencyStorage {
 
-    public <K, V extends Comparable<? super V>> Map<K, V>
-    sortByValue( Map<K, V> map )
-    {
-        Map<K,V> result = new LinkedHashMap<>();
-        Stream<Map.Entry<K,V>> st = map.entrySet().stream();
-
-        st.sorted(Map.Entry.comparingByValue())
-                .forEach(e ->result.put(e.getKey(),e.getValue()));
-
-        return result;
-    }
     @Override
-    public List<SymbolFrequencyModel> count(String line) {
-        List<SymbolFrequencyModel> resultList = new ArrayList<>();
+    public ArrayList<SymbolFrequencyModel> count(String line) {
+        if (line.isEmpty()) {
+            throw new IllegalArgumentException("String line is empty");
+        }
+
+        ArrayList<SymbolFrequencyModel> resultList = new ArrayList<>();
         char[] chars = line.toCharArray();
         HashMap<Character, Integer> charMap = new HashMap<>();
 
+        // В цикле ниже, все char переменные из массива chars добавляем в hashMap,
+        // для более простого подсчета одинаковых значений
         for (Character c : chars) {
             if (charMap.containsKey(c)) {
                 charMap.put(c, charMap.get(c) + 1);
@@ -35,13 +28,13 @@ public class InMemorySymbolFrequencyStorage implements SymbolFrequencyStorage {
             }
         }
 
-        for(Character c : charMap.keySet()){
-            resultList.add(new SymbolFrequencyModel(c,charMap.get(c)));
+//      В цикле ниже обходим весь HashMap charMap и, создавая Объект SymbolFrequency, добавляем в ArrayList resultList
+        for (Character c : charMap.keySet()) {
+            resultList.add(new SymbolFrequencyModel(c, charMap.get(c)));
         }
 
-        resultList = resultList.stream()
-                .sorted(Comparator.comparing(SymbolFrequencyModel::getAmount))
-                .collect(Collectors.toList());
+        // сортируем список
+        resultList.sort((o1, o2) -> o2.getAmount()- o1.getAmount());
 
         return resultList;
     }

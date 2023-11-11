@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 @AllArgsConstructor
@@ -15,7 +14,7 @@ public class SymbolFrequencyService {
     @Autowired
     SymbolFrequencyStorage symbolFrequencyStorage;
 
-    public List<SymbolFrequencyModel> count(String line) {
+    public ArrayList<SymbolFrequencyModel> count(String line) {
         return symbolFrequencyStorage.count(line);
     }
 
