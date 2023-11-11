@@ -1,6 +1,6 @@
 package com.example.testtask;
 
-import com.example.testtask.Storage.SymbolFrequencyStorage;
+import com.example.testtask.storage.SymbolFrequencyStorage;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

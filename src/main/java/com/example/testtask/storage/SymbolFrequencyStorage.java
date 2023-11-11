@@ -1,4 +1,4 @@
-package com.example.testtask.Storage;
+package com.example.testtask.storage;
 
 import java.util.HashMap;
 
